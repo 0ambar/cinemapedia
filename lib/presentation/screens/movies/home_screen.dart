@@ -43,18 +43,63 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     final nowPlayingMovies = ref.watch( nowPlayingMoviesProvider );
     final slideShowMovies = ref.watch(moviesSlideshowProvider);
    
-    return Column(
-      children: [
-        const CustomAppbar(),
+    return CustomScrollView(
+      slivers: [
 
-        MoviesSlideshow(movies: slideShowMovies),
-
-        MovieHorizontalListview(
-          movies: nowPlayingMovies,
-          title: 'En cines',
-          subtitle: 'Lunes 20',
+        const SliverAppBar(
+          floating: true,
+          flexibleSpace: FlexibleSpaceBar(
+            centerTitle: true,
+            title: CustomAppbar(),
+          ),
         ),
-      ]
+
+        SliverList(delegate: SliverChildBuilderDelegate(
+          
+          childCount: 1,          
+          (context, index) {
+
+            return Column(
+              children: [
+            
+                MoviesSlideshow(movies: slideShowMovies),
+            
+                MovieHorizontalListview(
+                  movies: nowPlayingMovies,
+                  title: 'En cines',
+                  subtitle: 'Lunes 20',
+                  loadNextpage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
+                ),
+            
+                MovieHorizontalListview(
+                  movies: nowPlayingMovies,
+                  title: 'Soon',
+                  subtitle: 'This month',
+                  loadNextpage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
+                ),
+            
+                MovieHorizontalListview(
+                  movies: nowPlayingMovies,
+                  title: 'Popular',
+                  subtitle: '',
+                  loadNextpage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
+                ),
+            
+                MovieHorizontalListview(
+                  movies: nowPlayingMovies,
+                  title: 'The bests',
+                  subtitle: 'Everytime',
+                  loadNextpage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
+                ),
+
+                const SizedBox(height: 15,)
+              ]
+            );
+          
+          },
+          
+        ))
+      ],
     );
   }
 }
