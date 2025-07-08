@@ -55,6 +55,7 @@ class _Slide extends StatelessWidget {
         ),
       ]
     );
+    
     return Padding(
       padding: const EdgeInsets.only( bottom: 30 ),
       child: DecoratedBox(
