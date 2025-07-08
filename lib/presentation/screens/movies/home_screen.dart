@@ -35,17 +35,28 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     super.initState();
 
     ref.read( nowPlayingMoviesProvider.notifier ).loadNextPage();
+    ref.read( popularMoviesProvider.notifier ).loadNextPage();
+    ref.read( upcomingMoviesProvider.notifier ).loadNextPage();
+    ref.read( topRatedMoviesProvider.notifier ).loadNextPage();
   }
 
   @override
   Widget build(BuildContext context) {
+
+    final isLoading = ref.watch( initialLoadingProvider );
+    if(isLoading) return const FullScreenLoader();
     
     final nowPlayingMovies = ref.watch( nowPlayingMoviesProvider );
-    final slideShowMovies = ref.watch(moviesSlideshowProvider);
+    final popularMovies = ref.watch( popularMoviesProvider );
+    final upcomingMovies = ref.watch( upcomingMoviesProvider );
+    final topRatedMovies = ref.watch( topRatedMoviesProvider );
+
+    final slideShowMovies = ref.watch( moviesSlideshowProvider );
+
    
     return CustomScrollView(
       slivers: [
-
+    
         const SliverAppBar(
           floating: true,
           flexibleSpace: FlexibleSpaceBar(
@@ -53,12 +64,12 @@ class _HomeViewState extends ConsumerState<_HomeView> {
             title: CustomAppbar(),
           ),
         ),
-
+    
         SliverList(delegate: SliverChildBuilderDelegate(
           
           childCount: 1,          
           (context, index) {
-
+    
             return Column(
               children: [
             
@@ -66,32 +77,32 @@ class _HomeViewState extends ConsumerState<_HomeView> {
             
                 MovieHorizontalListview(
                   movies: nowPlayingMovies,
-                  title: 'En cines',
-                  subtitle: 'Lunes 20',
+                  title: 'Playing',
+                  subtitle: 'Today',
                   loadNextpage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
                 ),
             
                 MovieHorizontalListview(
-                  movies: nowPlayingMovies,
+                  movies: upcomingMovies,
                   title: 'Soon',
                   subtitle: 'This month',
-                  loadNextpage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
+                  loadNextpage: () => ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
                 ),
             
                 MovieHorizontalListview(
-                  movies: nowPlayingMovies,
+                  movies: popularMovies,
                   title: 'Popular',
                   subtitle: '',
-                  loadNextpage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
+                  loadNextpage: () => ref.read(popularMoviesProvider.notifier).loadNextPage(),
                 ),
             
                 MovieHorizontalListview(
-                  movies: nowPlayingMovies,
+                  movies: topRatedMovies,
                   title: 'The bests',
                   subtitle: 'Everytime',
-                  loadNextpage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
+                  loadNextpage: () => ref.read(topRatedMoviesProvider.notifier).loadNextPage(),
                 ),
-
+    
                 const SizedBox(height: 15,)
               ]
             );
