@@ -1,14 +1,4 @@
-// To parse this JSON data, do
-//
-//     final theMovieDbResponse = theMovieDbResponseFromJson(jsonString);
-
-import 'dart:convert';
-
 import 'package:cinemapedia/infrastructure/models/themoviedb/movie_themoviedb.dart';
-
-TheMovieDbResponse theMovieDbResponseFromJson(String str) => TheMovieDbResponse.fromJson(json.decode(str));
-
-String theMovieDbResponseToJson(TheMovieDbResponse data) => json.encode(data.toJson());
 
 class TheMovieDbResponse {
     final Dates? dates;

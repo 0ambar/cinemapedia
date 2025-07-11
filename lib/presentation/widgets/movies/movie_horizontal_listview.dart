@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:cinemapedia/config/helpers/human_formats.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
-import 'package:flutter/material.dart';
 
 class MovieHorizontalListview extends StatefulWidget {
 
@@ -131,14 +133,19 @@ class _Slide extends StatelessWidget {
                 width: 150,
                 height: 230,
                 loadingBuilder: (context, child, loadingProgress) {
+                  
                   if(loadingProgress != null) {
                     return const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Center(child: CircularProgressIndicator(strokeWidth: 2.0,),),
                     );
                   }
+                  
+                  return GestureDetector(
+                    onTap: () => context.push('/movie/${ movie.id }'),
+                    child: FadeIn(child: child),
+                  );
 
-                  return FadeIn(child: child);
                 },
               ),
             ),
