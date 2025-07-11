@@ -21,6 +21,7 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
     super.initState();
 
     ref.read( movieInfoProvider.notifier ).loadMovie( widget.movieId );
+    ref.read( actorsByMovieProvider.notifier ).loadActors( widget.movieId );
   }
 
   @override
@@ -29,7 +30,7 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
     final Movie? movie = ref.watch( movieInfoProvider )[widget.movieId];
 
     if( movie == null ) {
-      return Scaffold(body: const Center( child: CircularProgressIndicator( strokeWidth: 2,),));
+      return const Scaffold(body: Center( child: CircularProgressIndicator( strokeWidth: 2,),));
     }
 
     return Scaffold(
@@ -53,7 +54,7 @@ class _CustomSliverAppBar extends StatelessWidget {
 
   final Movie movie;
 
-  const _CustomSliverAppBar({super.key, required this.movie});
+  const _CustomSliverAppBar({required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +122,7 @@ class _MovieDetails extends StatelessWidget {
 
   final Movie movie;
 
-  const _MovieDetails({super.key, required this.movie});
+  const _MovieDetails({required this.movie});
 
   @override
   Widget build(BuildContext context) {
