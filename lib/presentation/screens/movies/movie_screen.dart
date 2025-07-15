@@ -35,19 +35,21 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
       return const Scaffold(body: Center( child: CircularProgressIndicator( strokeWidth: 2,),));
     }
 
-    return Scaffold(
-      body: CustomScrollView(
-        physics: const ClampingScrollPhysics(),
-        slivers: [
-
-          _CustomSliverAppBar(movie: movie,),
-
-          SliverList(delegate: SliverChildBuilderDelegate(
-            (context, index) => _MovieDetails(movie: movie),
-            childCount: 1
-          ))
-          
-        ],
+    return SafeArea(
+      child: Scaffold(
+        body: CustomScrollView(
+          physics: const ClampingScrollPhysics(),
+          slivers: [
+      
+            _CustomSliverAppBar(movie: movie,),
+      
+            SliverList(delegate: SliverChildBuilderDelegate(
+              (context, index) => _MovieDetails(movie: movie),
+              childCount: 1
+            ))
+            
+          ],
+        ),
       ),
     );
   }
@@ -68,6 +70,14 @@ class _CustomSliverAppBar extends StatelessWidget {
       backgroundColor: Colors.black,
       expandedHeight: size.height * 0.7,
       foregroundColor: Colors.white,
+      actions: [
+        IconButton(
+          onPressed: () {
+
+          }, 
+          icon: const Icon(Icons.favorite_border)
+        ),
+      ],
       flexibleSpace: FlexibleSpaceBar(
         title: Text( 
           movie.title,
@@ -105,21 +115,21 @@ class _CustomSliverAppBar extends StatelessWidget {
               ),
             ),
             
-            const SizedBox.expand(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: RadialGradient(
-                    // begin: Alignment.topLeft,
-                    radius: 2,
-                    center: Alignment.topLeft,
-                    stops: [0.0, 0.2],
-                    colors: [
-                      Colors.black54,
-                      Colors.transparent,
-                    ]
-                  )
-                )
-              ),
+            // const _CustomRadialGradient(
+            //   radius: 2, 
+            //   center: Alignment.topLeft, 
+            //   stops: [0.0, 0.2], 
+            //   colors: [Colors.black54, Colors.transparent]
+            // ),
+
+            const _CustomRadialGradient(
+              radius: 10, 
+              center: Alignment.center, 
+              stops: [0.0, 0.2], 
+              colors: [
+                Colors.transparent,
+                Colors.black54, 
+              ]
             ),
           ],
         ),
@@ -262,5 +272,38 @@ class _ActorsByMovie extends ConsumerWidget {
         }
       ),
     );
+  }
+}
+
+class _CustomRadialGradient extends StatelessWidget {
+  
+  final AlignmentGeometry center;
+  final double radius;
+  final List<double> stops;
+  final List<Color> colors;
+
+  const _CustomRadialGradient({
+    required this.radius, 
+    required this.center, 
+    required this.stops, 
+    required this.colors
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    
+    return SizedBox.expand(
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: RadialGradient(
+            radius: radius,
+            center: center,
+            stops: stops,
+            colors: colors
+          )
+        )
+      ),
+    );
+
   }
 }
