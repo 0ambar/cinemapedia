@@ -79,8 +79,9 @@ class _CustomSliverAppBar extends ConsumerWidget {
       foregroundColor: Colors.white,
       actions: [
         IconButton(
-          onPressed: () {
-            ref.read( localStorageRepositoryProvier ).toggleFavorite(movie);
+          onPressed: () async {
+            await ref.read( favoriteMoviesProvider.notifier )
+              .toggleFavorite(movie);
 
             ref.invalidate( isFavoriteProvider(movie.id) ); // Reset and refresh the state
           }, 
@@ -130,13 +131,6 @@ class _CustomSliverAppBar extends ConsumerWidget {
                 )
               ),
             ),
-            
-            // const _CustomRadialGradient(
-            //   radius: 2, 
-            //   center: Alignment.topLeft, 
-            //   stops: [0.0, 0.2], 
-            //   colors: [Colors.black54, Colors.transparent]
-            // ),
 
             const _CustomRadialGradient(
               radius: 10, 
