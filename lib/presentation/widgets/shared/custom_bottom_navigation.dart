@@ -38,8 +38,8 @@ class CustomBottomNavigation extends StatelessWidget {
           label: 'Home'
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.category_outlined), 
-          label: 'Category'
+          icon: Icon(Icons.people_outline_rounded), 
+          label: 'People'
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.favorite_outline), 
