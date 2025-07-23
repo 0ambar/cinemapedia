@@ -13,4 +13,9 @@ class ActorRepositoryImpl extends ActorsRepository {
   Future<List<Actor>> getActorsByMovie(String movieId) {
     return datasource.getActorsByMovie(movieId);
   }
+  
+  @override
+  Future<List<Actor>> getTrendingPeople({String timeWindow = 'day'} ) {
+    return datasource.getTrendingPeople(timeWindow: timeWindow );
+  }
 }

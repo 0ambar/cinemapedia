@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
 
   final viewRoutes = const <Widget>[
     HomeView(),
-    PopularPeopleView(),
+    PopularPeopleView(timeWindow: 'day',),
     FavoritesView(),
   ];
 
