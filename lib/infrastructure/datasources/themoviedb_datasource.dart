@@ -96,5 +96,13 @@ class ThemoviedbDatasource extends MoviesDatasource {
 
     return _jsonToMovies(response.data);
   }
+  
+  @override
+  Future<List<Movie>> getTrendingMovies({String timeWindow = 'day'}) async {
+    
+    final response = await dio.get('/trending/movie/$timeWindow');
+
+    return _jsonToMovies(response.data);
+  }
 
 }

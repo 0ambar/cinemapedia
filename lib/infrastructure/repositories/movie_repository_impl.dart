@@ -38,5 +38,11 @@ class MovieRepositoryImpl extends MoviesRepository {
   Future<List<Movie>> searchMovies(String query) {
     return datasource.searchMovies(query);
   }
+  
+  @override
+  Future<List<Movie>> getTrendingMovies({String timeWindow = 'day'}) {
+    return datasource.getTrendingMovies(timeWindow: timeWindow);
+  }
+
 
 }

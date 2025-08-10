@@ -1,4 +1,3 @@
-import 'package:cinemapedia/presentation/views/people/popular_people_view.dart';
 import 'package:flutter/material.dart';
 import 'package:cinemapedia/presentation/widgets/widgets.dart';
 import 'package:cinemapedia/presentation/views/views.dart';
@@ -40,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
 
   final viewRoutes = const <Widget>[
     HomeView(),
-    PopularPeopleView(timeWindow: 'day',),
+    TrendingView(),
     FavoritesView(),
   ];
 

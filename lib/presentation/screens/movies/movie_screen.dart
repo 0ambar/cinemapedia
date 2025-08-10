@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cinemapedia/domain/entities/actor.dart';
 import 'package:cinemapedia/presentation/providers/providers.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
+import 'package:cinemapedia/presentation/widgets/widgets.dart';
 
 class MovieScreen extends ConsumerStatefulWidget {
 
@@ -253,27 +254,7 @@ class _ActorsByMovie extends ConsumerWidget {
               
                 children: [
                   
-                  // Actor photo
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.network(
-                      actor.profilePath,
-                      height: 180,
-                      width: 135,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-              
-                  // Actor name
-                  const SizedBox(height: 5,),
-                  Text(actor.name, maxLines: 2,
-                    textAlign: TextAlign.center,
-                  ),
-                  Text(actor.character ?? '', 
-                    maxLines: 2,
-                    style: const TextStyle( fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis,),
-                    textAlign: TextAlign.center,
-                  )
+                  PeoplePoster(180, 135, person: actor)
               
                 ],
               ),

@@ -39,6 +39,15 @@ final topRatedMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>
   
 });
 
+final trendingMoviesProvider = StateNotifierProvider<TrendingMoviesNotifier, List<Movie>>((ref) {
+
+  final getTrendingMovies = ref.watch( movieRepositoryProvider ).getTrendingMovies;
+  return TrendingMoviesNotifier(
+    getTrendingMovies: getTrendingMovies
+  );
+  
+});
+
 
 typedef MovieCallback = Future<List<Movie>> Function({ int page });
 
@@ -65,4 +74,25 @@ class MoviesNotifier extends StateNotifier<List<Movie>> {
     isLoading = false;
   }
 
+}
+
+typedef TrendingMovieCallback = Future<List<Movie>> Function({ String timeWindow });
+
+class TrendingMoviesNotifier extends StateNotifier<List<Movie>> {
+  bool isLoading = false;
+
+  TrendingMovieCallback getTrendingMovies;
+
+  TrendingMoviesNotifier({
+    required this.getTrendingMovies
+  }): super([]);
+
+  Future<void> loadMovies( String timeWindow ) async {
+    if( isLoading ) return;
+
+    isLoading = true;
+    final movies = await getTrendingMovies(timeWindow: timeWindow);
+    state = [...state, ...movies];
+    isLoading = false;
+  }
 }

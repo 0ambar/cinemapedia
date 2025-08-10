@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cinemapedia/domain/entities/actor.dart';
 import 'package:cinemapedia/presentation/providers/providers.dart';
 
-final popularPeopleProvider = StateNotifierProvider<PopularPeopleNotifier, List<Actor>>((ref) {
+final trendingPeopleProviderByDay = StateNotifierProvider<PopularPeopleNotifier, List<Actor>>((ref) {
   final actorsRepository = ref.watch( actorsRepositoryProvider );
   return PopularPeopleNotifier( getTrendingPeople: actorsRepository.getTrendingPeople );
 });
@@ -27,6 +27,5 @@ class PopularPeopleNotifier extends StateNotifier<List<Actor>> {
     state = [...state, ...people];
     isLoading = false;
   }
-
 
 }

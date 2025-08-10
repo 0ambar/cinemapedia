@@ -14,4 +14,6 @@ abstract class MoviesRepository {
 
   Future<List<Movie>> searchMovies( String query );
 
+  Future<List<Movie>> getTrendingMovies({ String timeWindow = 'day' });
+
 }
