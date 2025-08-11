@@ -15,6 +15,7 @@ class CustomAppbar extends ConsumerWidget {
 
     final colors = Theme.of(context).colorScheme;
     final titleStyle = Theme.of(context).textTheme.titleMedium;
+    final bool currentDarkMode = ref.read(isDarkModeProvider);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -51,6 +52,16 @@ class CustomAppbar extends ConsumerWidget {
     
               },
               icon: const Icon(Icons.search),
+            ),
+
+            IconButton(
+              onPressed: () {
+                ref.read(isDarkModeProvider.notifier)
+                  .update((state) => !currentDarkMode);
+              }, 
+              icon: currentDarkMode 
+              ? const Icon(Icons.light_mode_outlined)
+              : const Icon(Icons.dark_mode_outlined)
             )
     
           ],
