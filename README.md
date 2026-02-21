@@ -8,7 +8,7 @@
 
 # Screenshots
 
-<p align="center">
+<div align="center" style="display: grid; gap: 3px;">
   <img src="screenshots/home_dark.png" alt="home dark" width="200">
   <img src="screenshots/home_light.png" alt="home light" width="200">
   <img src="screenshots/trending_movies_dark.png" alt="trending movies dark" width="200">
@@ -20,4 +20,4 @@
   <img src="screenshots/search_light.png" alt="search light" width="200">
   <img src="screenshots/favorites_dark.png" alt="favorites dark" width="200">
   <img src="screenshots/favorites_light.png" alt="favorites light" width="200">
-</p>
+</div>
